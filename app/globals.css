@@ -1,0 +1,283 @@
+:root{--navy:#08284d;--orange:#f36b16;--cream:#fbf7ef;--sand:#d8c4a7;--ink:#071525;--white:#fff;--line:#d8dee5}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--cream)}a{color:inherit;text-decoration:none}.shell{width:min(1180px,calc(100% - 40px));margin:auto}.nav{height:82px;display:flex;align-items:center;justify-content:space-between;background:var(--cream)}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.08em}.brand img{width:48px;height:48px;border-radius:50%;object-fit:cover}.nav nav{display:flex;gap:30px;font-size:13px;font-weight:700;text-transform:uppercase}.button{display:inline-flex;align-items:center;justify-content:center;background:var(--orange);color:#fff;padding:16px 24px;border-radius:2px;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}.button.small{padding:12px 18px}.hero{background:var(--navy);color:white;min-height:710px;display:flex;align-items:center;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:70px}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.18em;color:var(--sand);margin:0 0 18px}.orange{color:var(--orange)}h1{font-size:clamp(68px,9vw,126px);line-height:.78;letter-spacing:-.075em;margin:0;font-weight:950}h1 em{font-style:normal;color:var(--orange)}.lead{font-size:19px;line-height:1.7;max-width:610px;color:#d9e0e8;margin:34px 0}.actions{display:flex;align-items:center;gap:28px}.text-link{font-size:13px;font-weight:800;text-transform:uppercase}.facts{display:flex;gap:22px;margin-top:48px;font-size:12px;color:#c9d4df}.facts span{padding-right:22px;border-right:1px solid #45617d}.facts span:last-child{border:0}.hero-art{position:relative;height:560px;display:grid;place-items:center}.hero-art:before{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(243,107,22,.7);border-radius:50%}.hero-art .circle{width:390px;height:390px;border-radius:50%;overflow:hidden;position:relative;z-index:2;box-shadow:0 30px 80px rgba(0,0,0,.35)}.hero-art img{width:100%;height:100%;object-fit:cover}.hero-art .tiger{position:absolute;font-family:serif;font-size:460px;color:rgba(255,255,255,.025);font-weight:bold}.hero-art>p{position:absolute;right:0;bottom:30px;color:var(--orange);font-size:16px;line-height:1.1;font-weight:900;letter-spacing:.12em}.statement{padding:110px 0;background:white}.split{display:grid;grid-template-columns:.7fr 1.4fr 1fr;gap:60px;align-items:start}.split h2,.section-head h2,.schedule h2,.faq h2,.cta h2{font-size:clamp(38px,5vw,66px);line-height:1;letter-spacing:-.045em;margin:0}.split>p:last-child,.section-head p,.schedule p,.cta>div>p{line-height:1.75;color:#53606d}.programs{background:#071525;color:white;padding:105px 0}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:45px}.section-head p{max-width:320px;color:#aebbc7}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#10253a;padding:34px;min-height:330px;display:flex;flex-direction:column;border-top:3px solid transparent;transition:.2s}.card:hover{transform:translateY(-5px);border-color:var(--orange)}.card>span{color:#6e8194;font-weight:900}.card .age{margin-top:auto;color:var(--orange);font-size:12px;font-weight:900;text-transform:uppercase}.card h3{font-size:34px;margin:8px 0}.card p{color:#b9c3cc;line-height:1.6}.card a{margin-top:20px;font-size:12px;font-weight:900;text-transform:uppercase}.schedule{padding:110px 0;background:var(--cream)}.schedule-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}.schedule-card{background:white;border:1px solid var(--line);box-shadow:0 20px 60px rgba(8,40,77,.08)}.schedule-card div{display:grid;grid-template-columns:150px 1fr;padding:24px 28px;border-bottom:1px solid var(--line)}.schedule-card div:last-child{border:0}.schedule-card strong{font-size:12px;letter-spacing:.12em;color:var(--orange)}.values{background:var(--orange);color:white}.values-grid{display:grid;grid-template-columns:repeat(4,1fr)}.values-grid div{padding:45px 25px;border-right:1px solid rgba(255,255,255,.3);display:flex;gap:16px;align-items:center}.values-grid b{opacity:.55}.values-grid span{font-size:14px;font-weight:900;letter-spacing:.12em}.faq{padding-top:110px;padding-bottom:110px}.faq-list{margin-top:45px;border-top:1px solid var(--line)}details{border-bottom:1px solid var(--line);padding:0 4px}summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;padding:25px 0;font-size:19px;font-weight:800}details p{max-width:760px;color:#586573;line-height:1.7;padding-bottom:22px}.cta{background:var(--navy);color:white;padding:100px 0}.cta>div>p{color:#c7d2dc;max-width:600px}.button.light{margin-top:20px}.footer{min-height:120px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#5d6872}.footer .brand img{width:40px;height:40px}@media(max-width:850px){.nav nav{display:none}.hero{min-height:auto;padding:70px 0}.hero-grid,.split,.schedule-grid{grid-template-columns:1fr}.hero-art{height:400px;order:-1}.hero-art:before{width:360px;height:360px}.hero-art .circle{width:285px;height:285px}.facts{flex-wrap:wrap}.cards{grid-template-columns:1fr}.section-head{display:block}.values-grid{grid-template-columns:1fr 1fr}.footer{flex-direction:column;justify-content:center;gap:12px}.split{gap:22px}.schedule-grid{gap:45px}}@media(max-width:520px){.shell{width:min(100% - 26px,1180px)}.nav .button{display:none}.hero-art{height:330px}.hero-art:before{width:295px;height:295px}.hero-art .circle{width:235px;height:235px}.actions{align-items:flex-start;flex-direction:column}.facts{flex-direction:column}.facts span{border:0}.values-grid{grid-template-columns:1fr}.schedule-card div{grid-template-columns:1fr;gap:8px}}
+/* ==================================================
+   KAF ACADEMY HERO
+   Original photo background / content on right
+   ================================================== */
+
+.kaf-hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  background: #000000;
+}
+
+/*
+  원본 사진은 수정하지 않습니다.
+  확대만 하여 원본 이미지 양쪽의 검은 여백이
+  화면 밖으로 잘려 보이도록 합니다.
+*/
+.kaf-hero__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -2;
+
+  width: 123%;
+  height: 123%;
+
+  object-fit: cover;
+  object-position: center center;
+
+  transform: translate(-50%, -50%);
+}
+
+/*
+  별도의 네모난 배경 없이
+  오른쪽 글자의 가독성만 조금 확보합니다.
+*/
+.kaf-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 35%,
+    rgba(0, 0, 0, 0.08) 55%,
+    rgba(0, 0, 0, 0.42) 100%
+  );
+}
+
+.kaf-hero__layout {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.kaf-hero__content {
+  width: min(620px, 46vw);
+  margin-left: auto;
+}
+
+.kaf-hero__eyebrow {
+  margin: 0 0 18px;
+  color: #ff6800;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.kaf-hero__title {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(74px, 8vw, 140px);
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -5px;
+  text-transform: uppercase;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.kaf-hero__title span {
+  color: #ff6800;
+}
+
+.kaf-hero__description {
+  max-width: 580px;
+  margin: 32px 0 0;
+  color: #ffffff;
+  font-size: clamp(17px, 1.4vw, 21px);
+  line-height: 1.65;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
+}
+
+.kaf-hero__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 60px;
+  margin-top: 32px;
+  padding: 0 34px;
+
+  background: #ff6800;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease;
+}
+
+.kaf-hero__button:hover {
+  background: #e85f00;
+  transform: translateY(-2px);
+}
+
+.kaf-hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 34px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+}
+
+.kaf-hero__facts span {
+  padding: 0 18px;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.kaf-hero__facts span:first-child {
+  padding-left: 0;
+}
+
+.kaf-hero__facts span:last-child {
+  border-right: 0;
+}
+
+/* 태블릿과 모바일은 우선 기본적인 정렬만 적용 */
+@media (max-width: 900px) {
+  .kaf-hero {
+    min-height: 760px;
+    align-items: flex-end;
+  }
+
+  .kaf-hero__image {
+    width: 150%;
+    height: 150%;
+    object-position: 38% center;
+  }
+
+  kaf-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  /* 왼쪽은 원본 사진, 오른쪽 절반은 브랜드 남색 */
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 50%,
+    var(--navy, #0a2d52) 50%,
+    var(--navy, #0a2d52) 100%
+  );
+}
+
+ .kaf-hero__layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+  .kaf-hero__content {
+  grid-column: 2;
+  width: 100%;
+  margin: 0;
+  padding-left: clamp(42px, 5vw, 90px);
+  padding-right: 20px;
+  align-self: center;
+}
+}
+
+@media (max-width: 600px) {
+  .kaf-hero {
+    min-height: 700px;
+  }
+
+  .kaf-hero__title {
+    font-size: clamp(58px, 20vw, 86px);
+    line-height: 0.84;
+    letter-spacing: -3px;
+  }
+
+  .kaf-hero__description {
+    margin-top: 22px;
+    font-size: 16px;
+  }
+
+  .kaf-hero__facts {
+    gap: 10px 18px;
+    margin-top: 26px;
+  }
+
+  .kaf-hero__facts span {
+    padding: 0;
+    border: 0;
+  }
+}
+/* KAF HERO — RIGHT NAVY PANEL FIX */
+
+.kaf-hero {
+  position: relative !important;
+  isolation: isolate;
+}
+
+.kaf-hero__image {
+  z-index: 0 !important;
+}
+
+/* 기존 가상 그라데이션 제거 */
+.kaf-hero::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* 화면 오른쪽 절반의 실제 남색 패널 */
+.kaf-hero__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 50%;
+  height: 100%;
+
+  background: #0a2d52;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 글자는 패널보다 위에 표시 */
+.kaf-hero__layout {
+  position: relative !important;
+  z-index: 2 !important;
+
+  width: 100%;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.kaf-hero__content {
+  grid-column: 2 !important;
+  align-self: center;
+
+  width: 100% !important;
+  margin: 0 !important;
+
+  padding-left: clamp(42px, 5vw, 90px);
+  padding-right: clamp(24px, 4vw, 70px);
+}
