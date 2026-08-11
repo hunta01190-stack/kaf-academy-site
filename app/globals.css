@@ -310,3 +310,23 @@
   line-height: 1;
   white-space: nowrap;
 }
+/* =========================
+   NEVER GIVE UP TITLE
+   ========================= */
+
+.kaf-hero__title {
+  font-size: clamp(82px, 8.7vw, 150px);
+  line-height: 0.92;
+}
+
+.kaf-hero__title .kaf-hero__never {
+  display: inline-block;
+  color: #ffffff;
+  transform: translateX(-14px);
+}
+
+.kaf-hero__title .kaf-hero__give {
+  display: inline-block;
+  color: #ff6800;
+  transform: translateX(14px);
+}
