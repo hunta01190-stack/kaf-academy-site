@@ -28,7 +28,7 @@ export default function Home() {
      <section className="kaf-hero" id="top">
   <img
     className="kaf-hero__image"
-    src="/images/hero-original.png"
+    src="/Images/hero-original.png"
     alt="A child practicing inline skating at KAF Academy"
   />
 
