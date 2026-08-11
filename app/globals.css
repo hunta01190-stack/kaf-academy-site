@@ -287,20 +287,21 @@
 .kaf-hero__brand {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 34px;
+  gap: 28px;
+  margin-bottom: 42px;
 }
 
 .kaf-hero__brand img {
-  width: 64px;
-  height: 64px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: contain;
 }
 
 .kaf-hero__brand span {
   color: #ffffff;
-  font-size: 20px;
+  font-size: 52px;
   font-weight: 900;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
