@@ -282,26 +282,31 @@
   padding-right: clamp(24px, 4vw, 70px);
 }
 
-/* HERO KAF ACADEMY BRAND */
+/* =========================
+   HERO BRAND - LARGE VERSION
+   ========================= */
 
 .kaf-hero__brand {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 30px;
   margin-bottom: 42px;
+  width: max-content;
 }
 
 .kaf-hero__brand img {
-  width: 180px;
-  height: 180px;
+  width: 288px;
+  height: 288px;
   border-radius: 50%;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .kaf-hero__brand span {
   color: #ffffff;
-  font-size: 52px;
+  font-size: 78px;
   font-weight: 900;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
+  line-height: 1;
   white-space: nowrap;
 }
