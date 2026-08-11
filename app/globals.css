@@ -281,23 +281,3 @@
   padding-left: clamp(42px, 5vw, 90px);
   padding-right: clamp(24px, 4vw, 70px);
 }
-
-/* =========================
-   HEADER LOGO SIZE & POSITION
-   ========================= */
-
-.nav .brand {
-  transform: translateX(-70px);
-  gap: 14px;
-}
-
-.nav .brand img {
-  width: 68px;
-  height: 68px;
-}
-
-.nav .brand span {
-  font-size: 18px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-}
