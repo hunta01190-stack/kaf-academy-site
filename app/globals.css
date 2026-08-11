@@ -281,3 +281,26 @@
   padding-left: clamp(42px, 5vw, 90px);
   padding-right: clamp(24px, 4vw, 70px);
 }
+
+/* HERO KAF ACADEMY BRAND */
+
+.kaf-hero__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 34px;
+}
+
+.kaf-hero__brand img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.kaf-hero__brand span {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
