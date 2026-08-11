@@ -36,6 +36,10 @@ export default function Home() {
 
   <div className="shell kaf-hero__layout">
     <div className="kaf-hero__content">
+      <div className="kaf-hero__brand">
+  <img src="/kaf-logo.png" alt="KAF Academy" />
+  <span>KAF ACADEMY</span>
+</div>
       <p className="kaf-hero__eyebrow">
         INLINE SKATING LESSONS · SUWANEE, GA
       </p>
