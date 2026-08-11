@@ -44,11 +44,11 @@ export default function Home() {
         INLINE SKATING LESSONS · SUWANEE, GA
       </p>
 
-      <h1 className="kaf-hero__title">
-        NEVER
-        <br />
-        <span>GIVE UP.</span>
-      </h1>
+     <h1 className="kaf-hero__title">
+  <span className="kaf-hero__never">NEVER</span>
+  <br />
+  <span className="kaf-hero__give">GIVE UP.</span>
+</h1>
 
       <p className="kaf-hero__description">
         Build balance. Grow confidence.
