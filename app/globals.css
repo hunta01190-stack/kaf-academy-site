@@ -476,3 +476,77 @@
     padding: 0 !important;
   }
 }
+
+/* ==================================================
+   HERO DESKTOP RESPONSIVE SIZE FIX
+   화면 너비에 따라 브랜드/타이틀 자동 크기 조절
+   ================================================== */
+
+@media (min-width: 901px) {
+
+  .kaf-hero__layout {
+    padding-top: clamp(40px, 6vh, 80px) !important;
+    padding-bottom: clamp(40px, 6vh, 80px) !important;
+  }
+
+  .kaf-hero__content {
+    min-width: 0;
+
+    padding-left: clamp(28px, 4vw, 72px) !important;
+    padding-right: clamp(24px, 3vw, 60px) !important;
+  }
+
+  /* KAF ACADEMY 로고 + 글자 */
+  .kaf-hero__brand {
+    width: 100%;
+    max-width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: clamp(14px, 1.8vw, 30px);
+    margin-bottom: clamp(24px, 3vh, 42px);
+  }
+
+  .kaf-hero__brand img {
+    width: clamp(120px, 11vw, 288px) !important;
+    height: clamp(120px, 11vw, 288px) !important;
+
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .kaf-hero__brand span {
+    font-size: clamp(28px, 3.3vw, 78px) !important;
+
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.05em;
+
+    white-space: nowrap;
+  }
+
+  /* NEVER GIVE UP */
+  .kaf-hero__title {
+    font-size: clamp(66px, 7vw, 150px) !important;
+
+    line-height: 0.92 !important;
+    letter-spacing: -0.045em !important;
+  }
+
+  .kaf-hero__title .kaf-hero__never {
+    display: inline-block;
+
+    transform: translateX(
+      clamp(-18px, -0.7vw, -6px)
+    ) !important;
+  }
+
+  .kaf-hero__title .kaf-hero__give {
+    display: inline-block;
+
+    transform: translateX(
+      clamp(6px, 0.7vw, 18px)
+    ) !important;
+  }
+}
