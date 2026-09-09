@@ -31,7 +31,7 @@ const faqs = [
   ],
   [
     "Do you offer trial classes?",
-    "Yes. Trial classes are planned to begin in September 2026. More information about scheduling, pricing, and registration will be announced soon.",
+    "Yes. Trial classes are planned to begin in October 2026. More information about scheduling, pricing, and registration will be announced soon.",
   ],
   [
     "What happens if it rains?",
@@ -71,7 +71,7 @@ export default function Home() {
           <a href="#faq">FAQ</a>
         </nav>
 
-        <a className="button small" href="#contact">
+        <a className="button small" href="/trial">
           Book a Trial
         </a>
       </header>
@@ -108,7 +108,7 @@ export default function Home() {
               Keep moving forward.
             </p>
 
-            <a className="kaf-hero__button" href="#contact">
+            <a className="kaf-hero__button" href="/trial">
               BOOK A TRIAL CLASS
             </a>
 
@@ -297,16 +297,16 @@ export default function Home() {
           </h2>
 
           <p>
-            Trial classes are planned to begin in September 2026. For questions
+            Trial classes are planned to begin in October 2026.. For questions
             about lessons, equipment, locations, or upcoming trial availability,
             contact KAF Academy.
           </p>
 
           <a
             className="button light"
-            href="mailto:contact@kafinline.com"
+            href="/trial"
           >
-            Email KAF Academy
+            BOOK A TRIAL CLASS
           </a>
         </div>
       </section>
