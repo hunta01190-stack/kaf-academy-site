@@ -28,4 +28,5 @@ npm start
 ## Images
 
 - `public/kaf-logo.png` — 512px logo (replace with an SVG when available)
-- `public/Images/hero.jpg` — hero photo, 2000px wide, compressed. Keep new photos under ~500 KB.
+- `public/Images/hero.jpg` — hero photo, compressed. Keep new photos under ~500 KB.
+- Hero slider photos are listed in `app/slides.js`. Add a photo to `public/Images/` and one line there; with two or more photos the slider rotates automatically.
