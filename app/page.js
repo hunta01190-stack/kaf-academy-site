@@ -31,7 +31,7 @@ const faqs = [
   ],
   [
     "Do you offer trial classes?",
-    "Yes. Trial classes are planned to begin in October 2026. More information about scheduling, pricing, and registration will be announced soon.",
+    "Yes. You can book a trial class online — choose an available date and location, and reserve your child's spot in a few minutes.",
   ],
   [
     "What happens if it rains?",
@@ -79,7 +79,7 @@ export default function Home() {
       <section className="kaf-hero" id="top">
         <img
           className="kaf-hero__image"
-          src="/Images/hero-original.png"
+          src="/Images/hero.jpg"
           alt="A child practicing inline skating at KAF Academy"
         />
 
@@ -117,6 +117,10 @@ export default function Home() {
               <span>KOREAN + ENGLISH</span>
               <span>AGES 4+ &amp; ADULTS</span>
             </div>
+
+            <p className="kaf-hero__korean" lang="ko">
+              스와니 인라인 스케이트 레슨 · 한국어/영어 수업
+            </p>
           </div>
         </div>
       </section>
@@ -177,7 +181,7 @@ export default function Home() {
                 <p className="age">{item.age}</p>
                 <h3>{item.level}</h3>
                 <p>{item.text}</p>
-                <a href="#contact">Ask about availability →</a>
+                <a href="/trial">Book a trial class →</a>
               </article>
             ))}
           </div>
@@ -229,14 +233,28 @@ export default function Home() {
             <div>
               <strong>LOCATIONS</strong>
               <span>
-                Shakerag Park — Johns Creek
+                <a
+                  className="map-link"
+                  href="https://www.google.com/maps/search/?api=1&query=Shakerag+Park+10945+Rogers+Circle+Johns+Creek+GA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Shakerag Park — Johns Creek
+                  <br />
+                  10945 Rogers Circle, Johns Creek, GA
+                </a>
                 <br />
-                10945 Rogers Circle
                 <br />
-                <br />
-                Union Hill Park — Alpharetta
-                <br />
-                1590 Little Pine Trail, Alpharetta, GA 30005
+                <a
+                  className="map-link"
+                  href="https://www.google.com/maps/search/?api=1&query=Union+Hill+Park+1590+Little+Pine+Trail+Alpharetta+GA+30005"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Union Hill Park — Alpharetta
+                  <br />
+                  1590 Little Pine Trail, Alpharetta, GA 30005
+                </a>
               </span>
             </div>
 
@@ -297,17 +315,20 @@ export default function Home() {
           </h2>
 
           <p>
-            Trial classes are planned to begin in October 2026.. For questions
-            about lessons, equipment, locations, or upcoming trial availability,
-            contact KAF Academy.
+            Trial classes are open now. Pick an available date online, or
+            contact us with any questions about lessons, equipment, or
+            locations — in Korean or English.
           </p>
 
-          <a
-            className="button light"
-            href="/trial"
-          >
-            BOOK A TRIAL CLASS
-          </a>
+          <div className="cta-actions">
+            <a className="button light" href="/trial">
+              BOOK A TRIAL CLASS
+            </a>
+
+            <a className="cta-email" href="mailto:contact@kafinline.com">
+              contact@kafinline.com
+            </a>
+          </div>
         </div>
       </section>
 
@@ -317,8 +338,11 @@ export default function Home() {
           <span>KAF ACADEMY</span>
         </div>
 
-        <p>Kids Are the Future · Suwanee, Georgia</p>
-        <p>© 2026 KAF Academy</p>
+        <p>
+          Kids Are the Future · Suwanee, Georgia ·{" "}
+          <a href="mailto:contact@kafinline.com">contact@kafinline.com</a>
+        </p>
+        <p>© {new Date().getFullYear()} KAF Academy</p>
       </footer>
     </main>
   );

@@ -1,18 +1,22 @@
-# KAF Academy Website — Phase 1
+# KAF Academy Website
 
-A responsive one-page Next.js website using the approved KAF Academy logo colors and current business information.
+Next.js site for KAF Academy — kids inline skating lessons in Suwanee, Johns Creek, and Alpharetta, GA.
+
+- `/` — one-page site (programs, schedule, locations, FAQ)
+- `/trial` — trial class booking (Supabase)
+- `/api/trial-email` — sends booking confirmation emails to the parent and to KAF (SMTP)
 
 ## Run locally
 
-1. Install Node.js 20 or newer.
-2. In this folder run:
+Requires Node.js 20+.
 
 ```bash
 npm install
+cp .env.example .env.local   # fill in Supabase and SMTP values
 npm run dev
 ```
 
-3. Open http://localhost:3000
+Open http://localhost:3000. Without the Supabase values, the home page works but `/trial` cannot load classes.
 
 ## Build for production
 
@@ -21,10 +25,7 @@ npm run build
 npm start
 ```
 
-## Replace before launch
+## Images
 
-- `public/kaf-logo.png`: replace with a professionally redrawn SVG logo when available.
-- Contact email and booking link in `app/page.tsx`.
-- Exact class location and schedule.
-- Add real class photography and parental consent-compliant gallery images.
-- Add a real form handler before collecting visitor information.
+- `public/kaf-logo.png` — 512px logo (replace with an SVG when available)
+- `public/Images/hero.jpg` — hero photo, 2000px wide, compressed. Keep new photos under ~500 KB.

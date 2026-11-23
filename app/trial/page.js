@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "../../utils/supabase/client";
 
 export default function TrialPage() {
-  const supabase = createClient();
+  const [supabase] = useState(() => createClient());
 
   const [classes, setClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
@@ -167,6 +167,10 @@ if (bookingId) {
     );
   }
 }
+
+setReservationSummary((current) =>
+  current ? { ...current, emailSent } : current
+);
 
 setMessage(
   emailSent
@@ -565,9 +569,23 @@ setMessage(
         marginBottom: "22px",
       }}
     >
-      A confirmation email has been sent to:
-      <br />
-      <strong>{reservationSummary.email}</strong>
+      {reservationSummary.emailSent ? (
+        <>
+          A confirmation email has been sent to:
+          <br />
+          <strong>{reservationSummary.email}</strong>
+        </>
+      ) : (
+        <>
+          Your reservation is confirmed, but we could not send the
+          confirmation email to <strong>{reservationSummary.email}</strong>.
+          Please save this page or contact{" "}
+          <a href="mailto:contact@kafinline.com">
+            <strong>contact@kafinline.com</strong>
+          </a>
+          .
+        </>
+      )}
     </p>
 
     <div

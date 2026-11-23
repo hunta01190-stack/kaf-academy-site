@@ -550,3 +550,73 @@
     ) !important;
   }
 }
+/* ==================================================
+   POLISH — contrast, contact, mobile header
+   ================================================== */
+
+/* "OUR PURPOSE" 등 흰 배경 위 eyebrow 글자 대비 개선 */
+.statement .eyebrow {
+  color: var(--orange);
+}
+
+.kaf-hero__korean {
+  margin: 22px 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.map-link {
+  display: inline-block;
+  text-decoration: underline;
+  text-decoration-color: rgba(243, 107, 22, 0.5);
+  text-underline-offset: 3px;
+}
+
+.map-link:hover {
+  color: var(--orange);
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 28px;
+  margin-top: 20px;
+}
+
+.cta-actions .button.light {
+  margin-top: 0;
+}
+
+.cta-email {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footer a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 모바일에서도 상단에 예약 버튼 유지 */
+@media (max-width: 520px) {
+  .nav .button {
+    display: inline-flex;
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .nav .brand span {
+    font-size: 13px;
+  }
+
+  .nav .brand img {
+    width: 40px;
+    height: 40px;
+  }
+}
