@@ -1,10 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createClient } from "../../utils/supabase/client";
 
 export default function TrialPage() {
-  const [supabase] = useState(() => createClient());
+  // 브라우저에서만 Supabase 클라이언트를 만듭니다.
+  // (빌드 시 미리 렌더링할 때 환경변수가 없어도 빌드가 실패하지 않도록)
+  const supabaseRef = useRef(null);
+
+  function getSupabase() {
+    if (!supabaseRef.current) {
+      supabaseRef.current = createClient();
+    }
+
+    return supabaseRef.current;
+  }
 
   const [classes, setClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
@@ -33,9 +43,16 @@ export default function TrialPage() {
   async function loadClasses() {
     setLoadingClasses(true);
 
-    const { data, error } = await supabase.rpc(
-      "get_trial_class_availability"
-    );
+    let data = null;
+    let error = null;
+
+    try {
+      ({ data, error } = await getSupabase().rpc(
+        "get_trial_class_availability"
+      ));
+    } catch (clientError) {
+      error = clientError;
+    }
 
     if (error) {
       console.error(error);
@@ -105,7 +122,7 @@ export default function TrialPage() {
 
     setSubmitting(true);
 
-    const { data, error } = await supabase.rpc(
+    const { data, error } = await getSupabase().rpc(
       "reserve_trial_booking",
       {
         p_trial_class_id: selectedClass.id,
