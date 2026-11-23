@@ -1,7 +1,19 @@
+import { Archivo_Black, Inter } from "next/font/google";
 import "./globals.css";
 
+const display = Archivo_Black({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-display",
+});
+
+const body = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
+
 const description =
-  "Inline skating lessons for kids ages 4+ in Suwanee, Johns Creek, and Alpharetta, GA. Private and small-group weekend classes taught in Korean and English. 스와니 인라인 스케이트 레슨 · 한국어/영어 수업.";
+  "Inline skating lessons for kids ages 4+ and adults in Suwanee, Johns Creek, and Alpharetta, GA. Private and small-group weekend classes taught in Korean and English. 스와니 인라인 스케이트 레슨 · 한국어/영어 수업.";
 
 export const metadata = {
   metadataBase: new URL(
@@ -23,14 +35,14 @@ export const metadata = {
     description,
     type: "website",
     locale: "en_US",
-    images: [{ url: "/Images/hero.jpg", width: 2000, height: 920 }],
+    images: [{ url: "/Images/hero.jpg", width: 1628, height: 920 }],
   },
   icons: { icon: "/kaf-logo.png", apple: "/kaf-logo.png" },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>{children}</body>
     </html>
   );

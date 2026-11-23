@@ -219,14 +219,14 @@ setMessage(
     <main
       style={{
         minHeight: "100vh",
-        background: "#fbf7ef",
-        color: "#071525",
+        background: "#fff6ec",
+        color: "#0d1b3d",
       }}
     >
       <header
         style={{
-          background: "#ffffff",
-          borderBottom: "1px solid #d8dee5",
+          background: "#ff8a2a",
+          borderBottom: "3px solid #0d1b3d",
         }}
       >
         <div
@@ -276,15 +276,15 @@ setMessage(
 
       <section
         style={{
-          background: "#0a2d52",
-          color: "#ffffff",
-          padding: "70px 0",
+          background: "#ff8a2a",
+          color: "#0d1b3d",
+          padding: "56px 0 70px",
         }}
       >
         <div className="shell">
           <p
             style={{
-              color: "#ff6800",
+              color: "#0d1b3d",
               fontSize: "12px",
               fontWeight: "900",
               letterSpacing: ".16em",
@@ -296,9 +296,11 @@ setMessage(
           <h1
             style={{
               margin: "14px 0 16px",
+              fontFamily: "var(--font-display)",
+              fontWeight: 400,
               fontSize: "clamp(42px, 6vw, 76px)",
               lineHeight: "1",
-              letterSpacing: "-.045em",
+              letterSpacing: "-.03em",
             }}
           >
             BOOK A TRIAL CLASS
@@ -308,7 +310,8 @@ setMessage(
             style={{
               maxWidth: "650px",
               margin: 0,
-              color: "#d7e0e9",
+              color: "#0d1b3d",
+              fontWeight: 600,
               fontSize: "18px",
               lineHeight: "1.7",
             }}
@@ -338,7 +341,7 @@ setMessage(
           <div>
             <p
               style={{
-                color: "#ff6800",
+                color: "#c2410c",
                 fontSize: "12px",
                 fontWeight: "900",
                 letterSpacing: ".14em",
@@ -384,7 +387,7 @@ setMessage(
                       padding: "24px",
                       borderRadius: "8px",
                       border: selected
-                        ? "2px solid #0a2d52"
+                        ? "2px solid #0d1b3d"
                         : "1px solid #d8dee5",
                       background: trialClass.is_full
                         ? "#eeeeee"
@@ -417,7 +420,7 @@ setMessage(
                           style={{
                             display: "block",
                             marginTop: "6px",
-                            color: "#ff6800",
+                            color: "#c2410c",
                             fontWeight: "900",
                           }}
                         >
@@ -429,7 +432,7 @@ setMessage(
                         style={{
                           color: trialClass.is_full
                             ? "#c62828"
-                            : "#0a2d52",
+                            : "#0d1b3d",
                         }}
                       >
                         {trialClass.is_full
@@ -488,7 +491,7 @@ setMessage(
           <div>
             <p
               style={{
-                color: "#ff6800",
+                color: "#c2410c",
                 fontSize: "12px",
                 fontWeight: "900",
                 letterSpacing: ".14em",
@@ -535,7 +538,7 @@ setMessage(
 
     <p
       style={{
-        color: "#ff6800",
+        color: "#c2410c",
         fontSize: "12px",
         fontWeight: "900",
         letterSpacing: ".14em",
@@ -556,7 +559,7 @@ setMessage(
 
     <div
       style={{
-        background: "#0a2d52",
+        background: "#0d1b3d",
         color: "#ffffff",
         padding: "22px",
         borderRadius: "6px",
@@ -645,7 +648,7 @@ setMessage(
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0a2d52",
+          background: "#0d1b3d",
           color: "#ffffff",
           fontWeight: "900",
           fontSize: "13px",
@@ -665,9 +668,9 @@ setMessage(
           flex: "1",
           minWidth: "180px",
           minHeight: "54px",
-          border: "1px solid #0a2d52",
+          border: "1px solid #0d1b3d",
           background: "#ffffff",
-          color: "#0a2d52",
+          color: "#0d1b3d",
           fontWeight: "900",
           fontSize: "13px",
           cursor: "pointer",
@@ -681,7 +684,7 @@ setMessage(
             {selectedClass && (
               <div
                 style={{
-                  background: "#0a2d52",
+                  background: "#0d1b3d",
                   color: "#ffffff",
                   padding: "20px 22px",
                   borderRadius: "6px",
@@ -876,7 +879,7 @@ setMessage(
                   background:
                     submitting || !selectedClass
                       ? "#a7adb3"
-                      : "#ff6800",
+                      : "#0d1b3d",
                   color: "#ffffff",
                   fontSize: "14px",
                   fontWeight: "900",

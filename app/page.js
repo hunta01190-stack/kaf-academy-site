@@ -1,18 +1,21 @@
+import HeroSlider from "./HeroSlider";
+import slides from "./slides";
+
 const programs = [
   {
-    level: "Private Lessons",
-    age: "1-on-1 Coaching",
+    tag: "1-ON-1",
+    title: "Private Lessons",
     text: "Personalized instruction based on each student's level, pace, and goals.",
   },
   {
-    level: "Small Group Lessons",
-    age: "Up to 6 Students",
-    text: "Small classes designed to provide focused coaching, individual feedback, and a better learning environment.",
+    tag: "MAX 6 KIDS",
+    title: "Small Group Lessons",
+    text: "Small classes with focused coaching and individual feedback for every child.",
   },
   {
-    level: "8-Level Curriculum",
-    age: "Step-by-Step Progression",
-    text: "Students learn through a structured 8-level curriculum that builds strong fundamentals and develops skills step by step.",
+    tag: "8 LEVELS",
+    title: "Step-by-Step Curriculum",
+    text: "A structured 8-level curriculum that builds strong fundamentals one skill at a time.",
   },
 ];
 
@@ -55,131 +58,155 @@ const faqs = [
   ],
 ];
 
+const locations = [
+  {
+    name: "Shakerag Park",
+    city: "Johns Creek",
+    address: "10945 Rogers Circle, Johns Creek, GA",
+    map: "https://www.google.com/maps/search/?api=1&query=Shakerag+Park+10945+Rogers+Circle+Johns+Creek+GA",
+  },
+  {
+    name: "Union Hill Park",
+    city: "Alpharetta",
+    address: "1590 Little Pine Trail, Alpharetta, GA 30005",
+    map: "https://www.google.com/maps/search/?api=1&query=Union+Hill+Park+1590+Little+Pine+Trail+Alpharetta+GA+30005",
+  },
+];
+
+const ticker = [
+  "PRIVATE LESSONS",
+  "SMALL GROUPS",
+  "8 LEVELS",
+  "SAT & SUN",
+  "KOREAN + ENGLISH",
+  "SUWANEE · JOHNS CREEK · ALPHARETTA",
+];
+
 export default function Home() {
   return (
     <main>
-      <header className="nav shell">
-        <a className="brand" href="#top" aria-label="KAF Academy home">
-          <img src="/kaf-logo.png" alt="KAF Academy logo" />
-          <span>KAF ACADEMY</span>
-        </a>
+      <header className="nav">
+        <div className="shell nav__inner">
+          <a className="brand" href="#top" aria-label="KAF Academy home">
+            <img src="/kaf-logo.png" alt="" />
+            <span>KAF ACADEMY</span>
+          </a>
 
-        <nav>
-          <a href="#about">About</a>
-          <a href="#programs">Programs</a>
-          <a href="#schedule">Schedule</a>
-          <a href="#faq">FAQ</a>
-        </nav>
+          <nav className="nav__links" aria-label="Main">
+            <a className="pill" href="#programs">Programs</a>
+            <a className="pill" href="#schedule">Schedule</a>
+            <a className="pill" href="#faq">FAQ</a>
+          </nav>
 
-        <a className="button small" href="/trial">
-          Book a Trial
-        </a>
+          <a className="pill pill--dark" href="/trial">
+            Book a Trial
+          </a>
+        </div>
       </header>
 
-      <section className="kaf-hero" id="top">
-        <img
-          className="kaf-hero__image"
-          src="/Images/hero.jpg"
-          alt="A child practicing inline skating at KAF Academy"
-        />
+      <section className="hero" id="top">
+        <div className="shell hero__grid">
+          <div className="hero__copy">
+            <p className="hero__eyebrow">INLINE SKATING LESSONS · SUWANEE, GA</p>
 
-        <div className="kaf-hero__panel" aria-hidden="true" />
-
-        <div className="shell kaf-hero__layout">
-          <div className="kaf-hero__content">
-            <div className="kaf-hero__brand">
-              <img src="/kaf-logo.png" alt="KAF Academy" />
-              <span>KAF ACADEMY</span>
-            </div>
-
-            <p className="kaf-hero__eyebrow">
-              INLINE SKATING LESSONS · SUWANEE, GA
-            </p>
-
-            <h1 className="kaf-hero__title">
-              <span className="kaf-hero__never">NEVER</span>
+            <h1 className="hero__title">
+              ROLL.
               <br />
-              <span className="kaf-hero__give">GIVE UP.</span>
+              FALL.
+              <br />
+              GET UP.
             </h1>
 
-            <p className="kaf-hero__description">
-              Build balance. Grow confidence.
-              <br />
-              Keep moving forward.
+            <p className="hero__lead">
+              Inline skating lessons for kids 4+ and adults. Learn step by step
+              through 8 levels — in Korean or English.
             </p>
 
-            <a className="kaf-hero__button" href="/trial">
-              BOOK A TRIAL CLASS
-            </a>
-
-            <div className="kaf-hero__facts">
-              <span>WEEKEND CLASSES</span>
-              <span>KOREAN + ENGLISH</span>
-              <span>AGES 4+ &amp; ADULTS</span>
+            <div className="hero__actions">
+              <a className="btn" href="/trial">
+                Book a trial class →
+              </a>
+              <span className="hero__ko" lang="ko">
+                한국어 수업 OK
+              </span>
             </div>
+          </div>
 
-            <p className="kaf-hero__korean" lang="ko">
-              스와니 인라인 스케이트 레슨 · 한국어/영어 수업
+          <div className="hero__media">
+            <HeroSlider slides={slides} />
+            <span className="sticker sticker--pop hero__sticker-a">
+              Ages 4+ welcome
+            </span>
+            <span className="sticker hero__sticker-b">MAX 6 KIDS</span>
+          </div>
+        </div>
+      </section>
+
+      <div className="ticker" aria-hidden="true">
+        <div className="ticker__track">
+          {[...ticker, ...ticker].map((item, i) => (
+            <span key={i}>
+              {item}
+              <b>✦</b>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <section className="about" id="about">
+        <div className="shell about__grid">
+          <div>
+            <p className="eyebrow">OUR PURPOSE</p>
+            <h2>
+              Building skills for skating.
+              <br />
+              Building strength for life.
+            </h2>
+          </div>
+
+          <div className="about__text">
+            <p>
+              At KAF Academy, we believe sports are more than physical
+              activity. They are an opportunity for children to learn how to
+              focus, keep trying, and experience the confidence that comes from
+              their own effort and progress.
+            </p>
+            <p>
+              Through inline skating, we help children face challenges,
+              overcome fear, and discover what they are capable of when they
+              don&apos;t give up.
+            </p>
+            <p>
+              <strong>Kids Are the Future.</strong> Our goal is to help each
+              child grow with confidence, perseverance, and focus — so they can
+              become strong individuals who positively contribute to the people
+              and the world around them.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="statement" id="about">
-        <div className="shell split">
-          <p className="eyebrow">OUR PURPOSE</p>
-
-          <h2>
-            Building skills for skating.
-            <br />
-            Building strength for life.
-          </h2>
-
-          <p>
-            At KAF Academy, we believe sports are more than physical activity.
-            They are an opportunity for children to learn how to focus, keep
-            trying, and experience the confidence that comes from their own
-            effort and progress.
-            <br />
-            <br />
-            Through inline skating, we help children face challenges, overcome
-            fear, and discover what they are capable of when they don't give up.
-            <br />
-            <br />
-            <strong>Kids Are the Future.</strong> We believe the lessons
-            children learn today help shape the people they become tomorrow.
-            Our goal is to help each child grow with confidence, perseverance,
-            and focus — so they can become strong individuals who positively
-            contribute to the people and the world around them.
-          </p>
-        </div>
-      </section>
-
       <section className="programs" id="programs">
         <div className="shell">
-          <p className="eyebrow orange">
-            LEVEL-BASED INLINE SKATING PROGRAMS
-          </p>
-
+          <p className="eyebrow">LEVEL-BASED PROGRAMS</p>
           <div className="section-head">
             <h2>
               Learn at the right level.
               <br />
               Progress with confidence.
             </h2>
-
             <p>
               Inline skating lessons for ages 4+, with private coaching or
-              small-group classes limited to a maximum of 6 students.
+              small-group classes limited to 6 students.
             </p>
           </div>
 
           <div className="cards">
             {programs.map((item, i) => (
-              <article className="card" key={item.level}>
-                <span>0{i + 1}</span>
-                <p className="age">{item.age}</p>
-                <h3>{item.level}</h3>
+              <article className="card" key={item.title}>
+                <span className="card__num">0{i + 1}</span>
+                <span className="card__tag">{item.tag}</span>
+                <h3>{item.title}</h3>
                 <p>{item.text}</p>
                 <a href="/trial">Book a trial class →</a>
               </article>
@@ -189,160 +216,123 @@ export default function Home() {
       </section>
 
       <section className="schedule" id="schedule">
-        <div className="shell schedule-grid">
+        <div className="shell schedule__grid">
           <div>
             <p className="eyebrow">WEEKEND SCHEDULE</p>
-
             <h2>
               Structured lessons.
               <br />
               Consistent progress.
             </h2>
-
-            <p>
-              KAF Academy offers 60-minute inline skating lessons on Saturdays
-              and Sundays. Each class includes warm-up, posture and balance
-              training, skating instruction, and cool-down exercises.
-              Families may generally choose the location that is most
-              convenient for them. Class times and locations may vary depending
-              on scheduling, weather, enrollment, or training needs.
+            <p className="schedule__lead">
+              60-minute lessons on Saturdays and Sundays: warm-up, posture and
+              balance training, skating drills, and cool-down. Times and
+              locations may vary with weather, enrollment, or training needs.
             </p>
+
+            <div className="times">
+              <div className="times__item">
+                <strong>SATURDAY</strong>
+                <span>12:00 PM – 7:00 PM</span>
+              </div>
+              <div className="times__item">
+                <strong>SUNDAY</strong>
+                <span>9:00 AM – 1:00 PM</span>
+              </div>
+              <div className="times__item">
+                <strong>CLASS</strong>
+                <span>60 minutes</span>
+              </div>
+            </div>
           </div>
 
-          <div className="schedule-card">
-            <div>
-              <strong>DAYS</strong>
-              <span>Saturday &amp; Sunday</span>
-            </div>
-
-            <div>
-              <strong>SATURDAY</strong>
-              <span>12:00 PM – 7:00 PM</span>
-            </div>
-
-            <div>
-              <strong>SUNDAY</strong>
-              <span>9:00 AM – 1:00 PM</span>
-            </div>
-
-            <div>
-              <strong>CLASS LENGTH</strong>
-              <span>60 Minutes</span>
-            </div>
-
-            <div>
-              <strong>LOCATIONS</strong>
-              <span>
-                <a
-                  className="map-link"
-                  href="https://www.google.com/maps/search/?api=1&query=Shakerag+Park+10945+Rogers+Circle+Johns+Creek+GA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Shakerag Park — Johns Creek
-                  <br />
-                  10945 Rogers Circle, Johns Creek, GA
-                </a>
-                <br />
-                <br />
-                <a
-                  className="map-link"
-                  href="https://www.google.com/maps/search/?api=1&query=Union+Hill+Park+1590+Little+Pine+Trail+Alpharetta+GA+30005"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Union Hill Park — Alpharetta
-                  <br />
-                  1590 Little Pine Trail, Alpharetta, GA 30005
-                </a>
-              </span>
-            </div>
-
-            <div>
-              <strong>LANGUAGE</strong>
-              <span>Korean &amp; English</span>
-            </div>
+          <div className="locations">
+            {locations.map((loc) => (
+              <a
+                key={loc.name}
+                className="location"
+                href={loc.map}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="location__city">{loc.city}</span>
+                <strong>{loc.name}</strong>
+                <span>{loc.address}</span>
+                <span className="location__link">Open in Maps →</span>
+              </a>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="values">
-        <div className="shell values-grid">
-          <div>
-            <b>01</b>
-            <span>COURAGE</span>
-          </div>
-          <div>
-            <b>02</b>
-            <span>DISCIPLINE</span>
-          </div>
-          <div>
-            <b>03</b>
-            <span>RESPECT</span>
-          </div>
-          <div>
-            <b>04</b>
-            <span>GROWTH</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="faq shell" id="faq">
-        <p className="eyebrow orange">FAQ</p>
-        <h2>Before your first class.</h2>
-
-        <div className="faq-list">
-          {faqs.map(([q, a]) => (
-            <details key={q}>
-              <summary>
-                {q}
-                <span>+</span>
-              </summary>
-              <p>{a}</p>
-            </details>
+      <section className="values" aria-label="Our values">
+        <div className="shell values__grid">
+          {["COURAGE", "DISCIPLINE", "RESPECT", "GROWTH"].map((value, i) => (
+            <div className="value" key={value}>
+              <b>0{i + 1}</b>
+              <span>{value}</span>
+            </div>
           ))}
         </div>
       </section>
 
-      <section className="cta" id="contact">
+      <section className="faq" id="faq">
         <div className="shell">
-          <p className="eyebrow">READY TO START?</p>
+          <p className="eyebrow">FAQ</p>
+          <h2>Before your first class.</h2>
 
-          <h2>
-            Build confidence.
-            <br />
-            One challenge at a time.
-          </h2>
+          <div className="faq__list">
+            {faqs.map(([q, a]) => (
+              <details key={q}>
+                <summary>
+                  {q}
+                  <span aria-hidden="true">+</span>
+                </summary>
+                <p>{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <p>
-            Trial classes are open now. Pick an available date online, or
-            contact us with any questions about lessons, equipment, or
-            locations — in Korean or English.
-          </p>
+      <section className="cta" id="contact">
+        <div className="shell cta__inner">
+          <div>
+            <p className="eyebrow eyebrow--pop">READY TO START?</p>
+            <h2>
+              Build confidence.
+              <br />
+              One challenge at a time.
+            </h2>
+            <p>
+              Trial classes are open now. Pick an available date online, or
+              contact us with any questions — in Korean or English.
+            </p>
+          </div>
 
-          <div className="cta-actions">
-            <a className="button light" href="/trial">
-              BOOK A TRIAL CLASS
+          <div className="cta__actions">
+            <a className="btn btn--light" href="/trial">
+              Book a trial class →
             </a>
-
-            <a className="cta-email" href="mailto:contact@kafinline.com">
+            <a className="cta__email" href="mailto:contact@kafinline.com">
               contact@kafinline.com
             </a>
           </div>
         </div>
       </section>
 
-      <footer className="footer shell">
-        <div className="brand">
-          <img src="/kaf-logo.png" alt="KAF Academy" />
-          <span>KAF ACADEMY</span>
+      <footer className="footer">
+        <div className="shell footer__inner">
+          <div className="brand">
+            <img src="/kaf-logo.png" alt="" />
+            <span>KAF ACADEMY</span>
+          </div>
+          <p>
+            Kids Are the Future · Suwanee, Georgia ·{" "}
+            <a href="mailto:contact@kafinline.com">contact@kafinline.com</a>
+          </p>
+          <p>© {new Date().getFullYear()} KAF Academy</p>
         </div>
-
-        <p>
-          Kids Are the Future · Suwanee, Georgia ·{" "}
-          <a href="mailto:contact@kafinline.com">contact@kafinline.com</a>
-        </p>
-        <p>© {new Date().getFullYear()} KAF Academy</p>
       </footer>
     </main>
   );
