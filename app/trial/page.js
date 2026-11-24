@@ -2,6 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createClient } from "../../utils/supabase/client";
+import trialConfig, {
+  GEAR_PREFIX_OWN,
+  GEAR_PREFIX_RENTAL,
+  paymentLines,
+  trialPrice,
+} from "../trialConfig";
 
 export default function TrialPage() {
   // 브라우저에서만 Supabase 클라이언트를 만듭니다.
@@ -33,6 +39,7 @@ export default function TrialPage() {
     phone: "",
     email: "",
     preferredLanguage: "English",
+    hasOwnGear: "",
     notes: "",
   });
 
@@ -112,7 +119,20 @@ export default function TrialPage() {
       return;
     }
 
+    if (!form.hasOwnGear) {
+      setMessage("Please tell us whether your child has their own skates and gear.");
+      return;
+    }
+
+    const hasOwnGear = form.hasOwnGear === "yes";
+    const gearTag = hasOwnGear ? GEAR_PREFIX_OWN : GEAR_PREFIX_RENTAL;
+    const notesWithGear = form.notes.trim()
+      ? `${gearTag}\n${form.notes.trim()}`
+      : gearTag;
+
     setReservationSummary({
+  hasOwnGear,
+  amount: trialPrice(hasOwnGear),
   classDate: selectedClass.class_date,
   classTime: selectedClass.start_time,
   locationName: selectedClass.location_name,
@@ -132,7 +152,7 @@ export default function TrialPage() {
         p_phone: form.phone,
         p_email: form.email,
         p_preferred_language: form.preferredLanguage,
-        p_notes: form.notes || null,
+        p_notes: notesWithGear,
       }
     );
 
@@ -205,6 +225,7 @@ setMessage(
       phone: "",
       email: "",
       preferredLanguage: "English",
+      hasOwnGear: "",
       notes: "",
     });
 
@@ -318,6 +339,36 @@ setMessage(
           >
             Choose an available class, enter your information,
             and reserve your child&apos;s spot.
+          </p>
+
+          <ul className="trial-facts">
+            <li>
+              <strong>WHEN</strong>
+              <span>{trialConfig.scheduleText}</span>
+            </li>
+            <li>
+              <strong>PRICE</strong>
+              <span>
+                ${trialConfig.price} with rental gear · ${trialConfig.priceWithOwnGear}{" "}
+                with your own gear
+              </span>
+            </li>
+            <li>
+              <strong>CLASS SIZE</strong>
+              <span>Up to {trialConfig.maxStudents} students</span>
+            </li>
+            <li>
+              <strong>BONUS</strong>
+              <span>
+                ${trialConfig.enrollmentCredit} off your first month when you
+                enroll after the trial
+              </span>
+            </li>
+          </ul>
+
+          <p className="trial-policy">
+            Full refund if you cancel at least {trialConfig.refundDaysBefore}{" "}
+            days before your class. {trialConfig.locationNote}
           </p>
         </div>
       </section>
@@ -615,7 +666,45 @@ setMessage(
         marginBottom: "28px",
       }}
     >
-      <strong>PLEASE BRING</strong>
+      <strong>TRIAL FEE: ${reservationSummary.amount}</strong>
+
+      <p style={{ lineHeight: "1.7", margin: "10px 0 0" }}>
+        {paymentLines().length > 0 ? (
+          <>
+            Please send ${reservationSummary.amount} with your child&apos;s
+            name in the memo to finish your booking:
+            <br />
+            {paymentLines().map((line) => (
+              <span key={line}>
+                <strong>{line}</strong>
+                <br />
+              </span>
+            ))}
+          </>
+        ) : (
+          <>
+            We will email you payment instructions (Zelle or Venmo) shortly.
+          </>
+        )}
+      </p>
+
+      <p style={{ lineHeight: "1.7", margin: "10px 0 0", color: "#33405e" }}>
+        Full refund if you cancel at least {trialConfig.refundDaysBefore} days
+        before class. Enroll in regular classes after your trial and get $
+        {trialConfig.enrollmentCredit} off your first month.
+      </p>
+    </div>
+
+    <div
+      style={{
+        borderTop: "1px solid #e2e6ea",
+        paddingTop: "22px",
+        marginBottom: "28px",
+      }}
+    >
+      <strong>
+        {reservationSummary.hasOwnGear ? "PLEASE BRING" : "WE WILL PROVIDE"}
+      </strong>
 
       <ul
         style={{
@@ -630,6 +719,10 @@ setMessage(
         <li>Elbow pads</li>
         <li>Wrist guards</li>
       </ul>
+
+      <p style={{ lineHeight: "1.7", margin: "10px 0 0", color: "#33405e" }}>
+        {trialConfig.locationNote}
+      </p>
     </div>
 
     <div
@@ -819,6 +912,32 @@ setMessage(
                   fontWeight: "800",
                 }}
               >
+                Does your child have their own skates and protective gear? *
+
+                <select
+                  name="hasOwnGear"
+                  value={form.hasOwnGear}
+                  onChange={updateForm}
+                  required
+                  style={inputStyle}
+                >
+                  <option value="">Select one</option>
+                  <option value="yes">
+                    Yes — skates, helmet, and pads (${trialConfig.priceWithOwnGear})
+                  </option>
+                  <option value="no">
+                    No — please provide rental gear (${trialConfig.price})
+                  </option>
+                </select>
+              </label>
+
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "20px",
+                  fontWeight: "800",
+                }}
+              >
                 Preferred Language *
 
                 <select
@@ -897,6 +1016,41 @@ setMessage(
           </div>
         </div>
       </section>
+
+      <style jsx global>{`
+        .trial-facts {
+          list-style: none;
+          margin: 28px 0 0;
+          padding: 0;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        .trial-facts li {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          padding: 12px 16px;
+          border: 2px solid #0d1b3d;
+          border-radius: 16px;
+          background: #ffffff;
+          font-weight: 700;
+        }
+
+        .trial-facts strong {
+          font-size: 11px;
+          letter-spacing: 0.14em;
+          color: #c2410c;
+        }
+
+        .trial-policy {
+          max-width: 760px;
+          margin: 18px 0 0;
+          font-weight: 600;
+          line-height: 1.6;
+        }
+      `}</style>
 
       <style jsx>{`
         @media (max-width: 850px) {

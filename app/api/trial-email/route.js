@@ -1,5 +1,10 @@
 import nodemailer from "nodemailer";
 import { createAdminClient } from "../../../utils/supabase/admin";
+import trialConfig, {
+  GEAR_PREFIX_OWN,
+  paymentLines,
+  trialPrice,
+} from "../../trialConfig";
 
 export const runtime = "nodejs";
 
@@ -108,6 +113,26 @@ export async function POST(request) {
       );
     }
 
+    const rawNotes = booking.notes || "";
+    const hasOwnGear = rawNotes.startsWith(GEAR_PREFIX_OWN);
+    const amount = trialPrice(hasOwnGear);
+    const parentNotes = rawNotes.replace(/^\[Own gear:[^\]]*\]\n?/, "").trim();
+    const payment = paymentLines();
+    const paymentText = payment.length
+      ? `Please send $${amount} with your child's name in the memo to finish your booking:\n${payment.join("\n")}`
+      : "We will email you payment instructions (Zelle or Venmo) shortly.";
+    const gearText = hasOwnGear
+      ? `PLEASE BRING
+
+- Inline skates
+- Helmet
+- Knee pads
+- Elbow pads
+- Wrist guards`
+      : `RENTAL GEAR
+
+We will provide inline skates, a helmet, and knee, elbow, and wrist pads.`;
+
     const formattedDate = formatDate(trialClass.class_date);
     const formattedTime = formatTime(trialClass.start_time);
 
@@ -146,9 +171,11 @@ Location: ${trialClass.location_name}
 Address: ${trialClass.location_address || "N/A"}
 
 Preferred Language: ${booking.preferred_language}
+Own gear: ${hasOwnGear ? "Yes" : "No (rental)"}
+Trial fee due: $${amount}
 
 Notes:
-${booking.notes || "None"}
+${parentNotes || "None"}
 
 --------------------------------
 KAF Academy
@@ -182,15 +209,16 @@ Location:
 ${trialClass.location_name}
 
 Address:
-${trialClass.location_address || ""}
+${trialClass.location_address || trialConfig.locationNote}
 
-PLEASE BRING
+TRIAL FEE: $${amount}
 
-- Inline skates
-- Helmet
-- Knee pads
-- Elbow pads
-- Wrist guards
+${paymentText}
+
+Full refund if you cancel at least ${trialConfig.refundDaysBefore} days before class.
+Enroll in regular classes after your trial and get $${trialConfig.enrollmentCredit} off your first month.
+
+${gearText}
 
 Please arrive a few minutes before the scheduled class time.
 

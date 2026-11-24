@@ -1,5 +1,6 @@
 import HeroSlider from "./HeroSlider";
 import slides from "./slides";
+import trialConfig from "./trialConfig";
 
 const programs = [
   {
@@ -34,7 +35,7 @@ const faqs = [
   ],
   [
     "Do you offer trial classes?",
-    "Yes. You can book a trial class online — choose an available date and location, and reserve your child's spot in a few minutes.",
+    `Yes. Trial classes run ${trialConfig.scheduleText.replace(" · ", ", ").replace(/^Every/, "every")}, with up to ${trialConfig.maxStudents} students. The trial is $${trialConfig.price} with rental gear, or $${trialConfig.priceWithOwnGear} if your child has their own skates and protective gear. You can cancel for a full refund up to ${trialConfig.refundDaysBefore} days before class, and if you enroll in regular classes afterward, you get $${trialConfig.enrollmentCredit} off your first month.`,
   ],
   [
     "What happens if it rains?",
@@ -333,8 +334,10 @@ export default function Home() {
               One challenge at a time.
             </h2>
             <p>
-              Trial classes are open now. Pick an available date online, or
-              contact us with any questions — in Korean or English.
+              Trial classes: {trialConfig.scheduleText}. ${trialConfig.price}{" "}
+              (${trialConfig.priceWithOwnGear} with your own gear), and $
+              {trialConfig.enrollmentCredit} off your first month when you
+              enroll. Questions? Contact us in Korean or English.
             </p>
           </div>
 
