@@ -1,9 +1,8 @@
 -- KAF Academy trial classes: every Saturday at 7:00 PM, March 6 – July 31, 2027
--- 19 classes, up to 6 students each, location to be announced.
+-- 20 classes, up to 6 students each, location to be announced.
 --
--- Skipped holiday weekends:
---   2027-05-29  Memorial Day weekend (Mon 5/31)
---   2027-06-19  Juneteenth (falls on this Saturday)
+-- Skipped dates:
+--   2027-03-27  Day before Easter (Sun 3/28)
 --   2027-07-03  Independence Day weekend (Sun 7/4)
 --
 -- How to run: Supabase dashboard → SQL Editor → New query → paste this → Run.
@@ -21,7 +20,7 @@ select
   'Johns Creek / Alpharetta area — exact park will be emailed before class',
   6
 from generate_series(date '2027-03-06', date '2027-07-31', interval '7 days') as d
-where d::date not in (date '2027-05-29', date '2027-06-19', date '2027-07-03')
+where d::date not in (date '2027-03-27', date '2027-07-03')
   and not exists (
   select 1
   from trial_classes t
@@ -29,7 +28,7 @@ where d::date not in (date '2027-05-29', date '2027-06-19', date '2027-07-03')
     and t.start_time = time '19:00'
 );
 
--- Check the result (should list 19 Saturdays):
+-- Check the result (should list 20 Saturdays):
 -- select class_date, start_time, location_name, capacity
 -- from trial_classes
 -- where class_date between '2027-03-01' and '2027-07-31'
