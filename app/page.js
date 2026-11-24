@@ -77,7 +77,7 @@ const ticker = [
   "PRIVATE LESSONS",
   "SMALL GROUPS",
   "8 LEVELS",
-  "SAT & SUN",
+  "EVERY SATURDAY",
   "KOREAN + ENGLISH",
   "SUWANEE · JOHNS CREEK · ALPHARETTA",
 ];
@@ -93,6 +93,7 @@ export default function Home() {
           </a>
 
           <nav className="nav__links" aria-label="Main">
+            <a className="pill" href="#about">About</a>
             <a className="pill" href="#programs">Programs</a>
             <a className="pill" href="#schedule">Schedule</a>
             <a className="pill" href="#faq">FAQ</a>
@@ -154,34 +155,65 @@ export default function Home() {
       </div>
 
       <section className="about" id="about">
-        <div className="shell about__grid">
-          <div>
-            <p className="eyebrow">OUR PURPOSE</p>
-            <h2>
-              Building skills for skating.
-              <br />
-              Building strength for life.
-            </h2>
+        <div className="shell">
+          <p className="eyebrow">ABOUT US</p>
+
+          <div className="about__grid">
+            <div>
+              <h2 className="about__title">
+                Kids Are
+                <br />
+                <span className="about__mark">the Future.</span>
+              </h2>
+              <p className="about__ko" lang="ko">
+                KAF는 &lsquo;Kids Are the Future&rsquo;의 약자입니다.
+              </p>
+            </div>
+
+            <div className="about__text">
+              <p className="about__lead">
+                KAF Academy started from one simple belief: the children we
+                coach today are the future of tomorrow. That belief is in our
+                name.
+              </p>
+              <p>
+                Our classes are fun first. Kids come to move, play, and laugh
+                with their friends — because children who enjoy sports keep
+                coming back to them.
+              </p>
+              <p>
+                But every lesson is also a chance to grow. Through sports,
+                children learn to listen, to respect their friends and coaches,
+                and to take responsibility for their own effort — habits that
+                point them in the right direction in life.
+              </p>
+              <p>
+                Most of all, we teach them not to give up easily. Every child
+                falls when learning to skate. What matters is getting back up
+                and trying again.
+              </p>
+            </div>
           </div>
 
-          <div className="about__text">
-            <p>
-              At KAF Academy, we believe sports are more than physical
-              activity. They are an opportunity for children to learn how to
-              focus, keep trying, and experience the confidence that comes from
-              their own effort and progress.
-            </p>
-            <p>
-              Through inline skating, we help children face challenges,
-              overcome fear, and discover what they are capable of when they
-              don&apos;t give up.
-            </p>
-            <p>
-              <strong>Kids Are the Future.</strong> Our goal is to help each
-              child grow with confidence, perseverance, and focus — so they can
-              become strong individuals who positively contribute to the people
-              and the world around them.
-            </p>
+          <div className="pillars">
+            <article className="pillar">
+              <span className="pillar__num">01</span>
+              <h3>Fun First</h3>
+              <p>Every class is built to be enjoyed, so kids love to move.</p>
+              <p className="pillar__ko" lang="ko">즐거운 운동 수업</p>
+            </article>
+            <article className="pillar">
+              <span className="pillar__num">02</span>
+              <h3>The Right Direction</h3>
+              <p>Respect, focus, and responsibility, learned through sport.</p>
+              <p className="pillar__ko" lang="ko">운동으로 배우는 올바른 삶의 방향</p>
+            </article>
+            <article className="pillar">
+              <span className="pillar__num">03</span>
+              <h3>Never Give Up</h3>
+              <p>Fall, get up, try again. Small wins build real confidence.</p>
+              <p className="pillar__ko" lang="ko">쉽게 포기하지 않는 마음</p>
+            </article>
           </div>
         </div>
       </section>
@@ -218,26 +250,22 @@ export default function Home() {
       <section className="schedule" id="schedule">
         <div className="shell schedule__grid">
           <div>
-            <p className="eyebrow">WEEKEND SCHEDULE</p>
+            <p className="eyebrow">SATURDAY SCHEDULE</p>
             <h2>
               Structured lessons.
               <br />
               Consistent progress.
             </h2>
             <p className="schedule__lead">
-              60-minute lessons on Saturdays and Sundays: warm-up, posture and
-              balance training, skating drills, and cool-down. Times and
-              locations may vary with weather, enrollment, or training needs.
+              60-minute lessons every Saturday: warm-up, posture and balance
+              training, skating drills, and cool-down. Times and locations may
+              vary with weather, enrollment, or training needs.
             </p>
 
             <div className="times">
               <div className="times__item">
                 <strong>SATURDAY</strong>
                 <span>12:00 PM – 7:00 PM</span>
-              </div>
-              <div className="times__item">
-                <strong>SUNDAY</strong>
-                <span>9:00 AM – 1:00 PM</span>
               </div>
               <div className="times__item">
                 <strong>CLASS</strong>
