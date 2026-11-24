@@ -1,10 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createClient } from "../../utils/supabase/client";
+import trialConfig, {
+  GEAR_PREFIX_OWN,
+  GEAR_PREFIX_RENTAL,
+  paymentLines,
+  trialPrice,
+} from "../trialConfig";
 
 export default function TrialPage() {
-  const supabase = createClient();
+  // 브라우저에서만 Supabase 클라이언트를 만듭니다.
+  // (빌드 시 미리 렌더링할 때 환경변수가 없어도 빌드가 실패하지 않도록)
+  const supabaseRef = useRef(null);
+
+  function getSupabase() {
+    if (!supabaseRef.current) {
+      supabaseRef.current = createClient();
+    }
+
+    return supabaseRef.current;
+  }
 
   const [classes, setClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
@@ -23,6 +39,7 @@ export default function TrialPage() {
     phone: "",
     email: "",
     preferredLanguage: "English",
+    hasOwnGear: "",
     notes: "",
   });
 
@@ -33,9 +50,16 @@ export default function TrialPage() {
   async function loadClasses() {
     setLoadingClasses(true);
 
-    const { data, error } = await supabase.rpc(
-      "get_trial_class_availability"
-    );
+    let data = null;
+    let error = null;
+
+    try {
+      ({ data, error } = await getSupabase().rpc(
+        "get_trial_class_availability"
+      ));
+    } catch (clientError) {
+      error = clientError;
+    }
 
     if (error) {
       console.error(error);
@@ -95,7 +119,20 @@ export default function TrialPage() {
       return;
     }
 
+    if (!form.hasOwnGear) {
+      setMessage("Please tell us whether your child has their own skates and gear.");
+      return;
+    }
+
+    const hasOwnGear = form.hasOwnGear === "yes";
+    const gearTag = hasOwnGear ? GEAR_PREFIX_OWN : GEAR_PREFIX_RENTAL;
+    const notesWithGear = form.notes.trim()
+      ? `${gearTag}\n${form.notes.trim()}`
+      : gearTag;
+
     setReservationSummary({
+  hasOwnGear,
+  amount: trialPrice(hasOwnGear),
   classDate: selectedClass.class_date,
   classTime: selectedClass.start_time,
   locationName: selectedClass.location_name,
@@ -105,7 +142,7 @@ export default function TrialPage() {
 
     setSubmitting(true);
 
-    const { data, error } = await supabase.rpc(
+    const { data, error } = await getSupabase().rpc(
       "reserve_trial_booking",
       {
         p_trial_class_id: selectedClass.id,
@@ -115,7 +152,7 @@ export default function TrialPage() {
         p_phone: form.phone,
         p_email: form.email,
         p_preferred_language: form.preferredLanguage,
-        p_notes: form.notes || null,
+        p_notes: notesWithGear,
       }
     );
 
@@ -168,6 +205,10 @@ if (bookingId) {
   }
 }
 
+setReservationSummary((current) =>
+  current ? { ...current, emailSent } : current
+);
+
 setMessage(
   emailSent
     ? `Your trial class is reserved. A confirmation email has been sent to you. ${
@@ -184,6 +225,7 @@ setMessage(
       phone: "",
       email: "",
       preferredLanguage: "English",
+      hasOwnGear: "",
       notes: "",
     });
 
@@ -198,14 +240,14 @@ setMessage(
     <main
       style={{
         minHeight: "100vh",
-        background: "#fbf7ef",
-        color: "#071525",
+        background: "#fff6ec",
+        color: "#0d1b3d",
       }}
     >
       <header
         style={{
-          background: "#ffffff",
-          borderBottom: "1px solid #d8dee5",
+          background: "#ff8a2a",
+          borderBottom: "3px solid #0d1b3d",
         }}
       >
         <div
@@ -255,15 +297,15 @@ setMessage(
 
       <section
         style={{
-          background: "#0a2d52",
-          color: "#ffffff",
-          padding: "70px 0",
+          background: "#ff8a2a",
+          color: "#0d1b3d",
+          padding: "56px 0 70px",
         }}
       >
         <div className="shell">
           <p
             style={{
-              color: "#ff6800",
+              color: "#0d1b3d",
               fontSize: "12px",
               fontWeight: "900",
               letterSpacing: ".16em",
@@ -275,9 +317,11 @@ setMessage(
           <h1
             style={{
               margin: "14px 0 16px",
+              fontFamily: "var(--font-display)",
+              fontWeight: 400,
               fontSize: "clamp(42px, 6vw, 76px)",
               lineHeight: "1",
-              letterSpacing: "-.045em",
+              letterSpacing: "-.03em",
             }}
           >
             BOOK A TRIAL CLASS
@@ -287,13 +331,44 @@ setMessage(
             style={{
               maxWidth: "650px",
               margin: 0,
-              color: "#d7e0e9",
+              color: "#0d1b3d",
+              fontWeight: 600,
               fontSize: "18px",
               lineHeight: "1.7",
             }}
           >
             Choose an available class, enter your information,
             and reserve your child&apos;s spot.
+          </p>
+
+          <ul className="trial-facts">
+            <li>
+              <strong>WHEN</strong>
+              <span>{trialConfig.scheduleText}</span>
+            </li>
+            <li>
+              <strong>PRICE</strong>
+              <span>
+                ${trialConfig.price} with rental gear · ${trialConfig.priceWithOwnGear}{" "}
+                with your own gear
+              </span>
+            </li>
+            <li>
+              <strong>CLASS SIZE</strong>
+              <span>Up to {trialConfig.maxStudents} students</span>
+            </li>
+            <li>
+              <strong>BONUS</strong>
+              <span>
+                ${trialConfig.enrollmentCredit} off your first month when you
+                enroll after the trial
+              </span>
+            </li>
+          </ul>
+
+          <p className="trial-policy">
+            Full refund if you cancel at least {trialConfig.refundDaysBefore}{" "}
+            days before your class. {trialConfig.locationNote}
           </p>
         </div>
       </section>
@@ -317,7 +392,7 @@ setMessage(
           <div>
             <p
               style={{
-                color: "#ff6800",
+                color: "#c2410c",
                 fontSize: "12px",
                 fontWeight: "900",
                 letterSpacing: ".14em",
@@ -363,7 +438,7 @@ setMessage(
                       padding: "24px",
                       borderRadius: "8px",
                       border: selected
-                        ? "2px solid #0a2d52"
+                        ? "2px solid #0d1b3d"
                         : "1px solid #d8dee5",
                       background: trialClass.is_full
                         ? "#eeeeee"
@@ -396,7 +471,7 @@ setMessage(
                           style={{
                             display: "block",
                             marginTop: "6px",
-                            color: "#ff6800",
+                            color: "#c2410c",
                             fontWeight: "900",
                           }}
                         >
@@ -408,7 +483,7 @@ setMessage(
                         style={{
                           color: trialClass.is_full
                             ? "#c62828"
-                            : "#0a2d52",
+                            : "#0d1b3d",
                         }}
                       >
                         {trialClass.is_full
@@ -467,7 +542,7 @@ setMessage(
           <div>
             <p
               style={{
-                color: "#ff6800",
+                color: "#c2410c",
                 fontSize: "12px",
                 fontWeight: "900",
                 letterSpacing: ".14em",
@@ -514,7 +589,7 @@ setMessage(
 
     <p
       style={{
-        color: "#ff6800",
+        color: "#c2410c",
         fontSize: "12px",
         fontWeight: "900",
         letterSpacing: ".14em",
@@ -535,7 +610,7 @@ setMessage(
 
     <div
       style={{
-        background: "#0a2d52",
+        background: "#0d1b3d",
         color: "#ffffff",
         padding: "22px",
         borderRadius: "6px",
@@ -565,9 +640,23 @@ setMessage(
         marginBottom: "22px",
       }}
     >
-      A confirmation email has been sent to:
-      <br />
-      <strong>{reservationSummary.email}</strong>
+      {reservationSummary.emailSent ? (
+        <>
+          A confirmation email has been sent to:
+          <br />
+          <strong>{reservationSummary.email}</strong>
+        </>
+      ) : (
+        <>
+          Your reservation is confirmed, but we could not send the
+          confirmation email to <strong>{reservationSummary.email}</strong>.
+          Please save this page or contact{" "}
+          <a href="mailto:contact@kafinline.com">
+            <strong>contact@kafinline.com</strong>
+          </a>
+          .
+        </>
+      )}
     </p>
 
     <div
@@ -577,7 +666,45 @@ setMessage(
         marginBottom: "28px",
       }}
     >
-      <strong>PLEASE BRING</strong>
+      <strong>TRIAL FEE: ${reservationSummary.amount}</strong>
+
+      <p style={{ lineHeight: "1.7", margin: "10px 0 0" }}>
+        {paymentLines().length > 0 ? (
+          <>
+            Please send ${reservationSummary.amount} with your child&apos;s
+            name in the memo to finish your booking:
+            <br />
+            {paymentLines().map((line) => (
+              <span key={line}>
+                <strong>{line}</strong>
+                <br />
+              </span>
+            ))}
+          </>
+        ) : (
+          <>
+            We will email you payment instructions (Zelle or Venmo) shortly.
+          </>
+        )}
+      </p>
+
+      <p style={{ lineHeight: "1.7", margin: "10px 0 0", color: "#33405e" }}>
+        Full refund if you cancel at least {trialConfig.refundDaysBefore} days
+        before class. Enroll in regular classes after your trial and get $
+        {trialConfig.enrollmentCredit} off your first month.
+      </p>
+    </div>
+
+    <div
+      style={{
+        borderTop: "1px solid #e2e6ea",
+        paddingTop: "22px",
+        marginBottom: "28px",
+      }}
+    >
+      <strong>
+        {reservationSummary.hasOwnGear ? "PLEASE BRING" : "WE WILL PROVIDE"}
+      </strong>
 
       <ul
         style={{
@@ -592,6 +719,10 @@ setMessage(
         <li>Elbow pads</li>
         <li>Wrist guards</li>
       </ul>
+
+      <p style={{ lineHeight: "1.7", margin: "10px 0 0", color: "#33405e" }}>
+        {trialConfig.locationNote}
+      </p>
     </div>
 
     <div
@@ -610,7 +741,7 @@ setMessage(
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0a2d52",
+          background: "#0d1b3d",
           color: "#ffffff",
           fontWeight: "900",
           fontSize: "13px",
@@ -630,9 +761,9 @@ setMessage(
           flex: "1",
           minWidth: "180px",
           minHeight: "54px",
-          border: "1px solid #0a2d52",
+          border: "1px solid #0d1b3d",
           background: "#ffffff",
-          color: "#0a2d52",
+          color: "#0d1b3d",
           fontWeight: "900",
           fontSize: "13px",
           cursor: "pointer",
@@ -646,7 +777,7 @@ setMessage(
             {selectedClass && (
               <div
                 style={{
-                  background: "#0a2d52",
+                  background: "#0d1b3d",
                   color: "#ffffff",
                   padding: "20px 22px",
                   borderRadius: "6px",
@@ -781,6 +912,32 @@ setMessage(
                   fontWeight: "800",
                 }}
               >
+                Does your child have their own skates and protective gear? *
+
+                <select
+                  name="hasOwnGear"
+                  value={form.hasOwnGear}
+                  onChange={updateForm}
+                  required
+                  style={inputStyle}
+                >
+                  <option value="">Select one</option>
+                  <option value="yes">
+                    Yes — skates, helmet, and pads (${trialConfig.priceWithOwnGear})
+                  </option>
+                  <option value="no">
+                    No — please provide rental gear (${trialConfig.price})
+                  </option>
+                </select>
+              </label>
+
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "20px",
+                  fontWeight: "800",
+                }}
+              >
                 Preferred Language *
 
                 <select
@@ -841,7 +998,7 @@ setMessage(
                   background:
                     submitting || !selectedClass
                       ? "#a7adb3"
-                      : "#ff6800",
+                      : "#0d1b3d",
                   color: "#ffffff",
                   fontSize: "14px",
                   fontWeight: "900",
@@ -859,6 +1016,41 @@ setMessage(
           </div>
         </div>
       </section>
+
+      <style jsx global>{`
+        .trial-facts {
+          list-style: none;
+          margin: 28px 0 0;
+          padding: 0;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        .trial-facts li {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          padding: 12px 16px;
+          border: 2px solid #0d1b3d;
+          border-radius: 16px;
+          background: #ffffff;
+          font-weight: 700;
+        }
+
+        .trial-facts strong {
+          font-size: 11px;
+          letter-spacing: 0.14em;
+          color: #c2410c;
+        }
+
+        .trial-policy {
+          max-width: 760px;
+          margin: 18px 0 0;
+          font-weight: 600;
+          line-height: 1.6;
+        }
+      `}</style>
 
       <style jsx>{`
         @media (max-width: 850px) {
